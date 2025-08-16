@@ -1,0 +1,239 @@
+body {
+    min-height: 100vh;
+    margin: 0;
+    background: #f8fafc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Raleway', Arial, sans-serif;
+    overflow: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode {
+    background: #111;
+    color: linen;
+}
+
+.logo-container {
+    position: fixed;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    text-align: center;
+}
+
+.batchbinder-logo {
+    font-size: 2.5rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: #38bdf8;
+    display: inline-block;
+    text-shadow: 2px 2px 4px rgba(56,189,248,0.5);
+    transition: transform 0.3s cubic-bezier(.4,2,.6,1);
+}
+
+.logo-tagline {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    left: 0;
+    top: 100%;
+    font-size: 0.9rem;
+    color: #666;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+body.dark-mode .logo-tagline {
+    color: #aaa;
+}
+
+.logo-container:hover .batchbinder-logo {
+    transform: translateY(-5px);
+}
+
+.logo-container:hover .logo-tagline {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.theme-toggle-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #e5e7eb;
+    border: none;
+    cursor: pointer;
+    width: 62px;
+    height: 32px;
+    border-radius: 16px;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    padding: 4px;
+    z-index: 10;
+}
+
+#themeIcon {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    transform: translateX(0);
+    transition: transform 0.3s ease, background-color 0.3s;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.theme-toggle-btn.dark {
+    background: #1e293b;
+}
+
+.theme-toggle-btn.dark #themeIcon {
+    transform: translateX(30px);
+    background: #0ea5e9;
+}
+
+.particles-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    perspective: 1000px;
+}
+
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0;
+    animation: particleFloat 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes particleFloat {
+    0% {
+        transform: translateY(100vh) translateZ(0) rotate(0deg);
+        opacity: 0;
+    }
+    20% { opacity: 1; }
+    90% { opacity: 1; }
+    100% {
+        transform: translateY(-20vh) translateZ(100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.center-box {
+    background: #f7f7fa;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(56,189,248,0.13);
+    padding: 48px 32px 32px 32px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    border: none;
+    position: relative;
+    z-index: 1;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+}
+
+.fun-fact-badge {
+    position: relative;
+    display: block;
+    font-size: 0.95rem;
+    color: #222;
+    background: #ffeb3b;
+    padding: 4px 18px;
+    border-radius: 8px;
+    margin-bottom: 28px;
+    margin-top: 0;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(212,175,55,0.13);
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+body.dark-mode .fun-fact-badge {
+    color: #222;
+    background: #ffe066;
+}
+
+body.dark-mode .center-box {
+    background: #1a1a1a;
+    color: linen;
+    box-shadow: 0 8px 32px rgba(56,189,248,0.2);
+}
+
+body.dark-mode .fact {
+    color: linen;
+}
+
+.fact {
+    font-size: 1.15rem;
+    color: #222;
+    margin-bottom: 32px;
+    min-height: 60px;
+    line-height: 1.5;
+}
+
+.continue-btn {
+    background: #38bdf8;
+    color: #fff;
+    border: none;
+    border-radius: 24px;
+    padding: 12px 36px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s, opacity 0.4s;
+}
+
+.continue-btn:hover {
+    background: #0ea5e9;
+}
+
+.fade-out {
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.7s cubic-bezier(.4,2,.6,1);
+}
+
+@media (max-width: 700px) {
+    .theme-toggle-btn {
+        display: none !important;
+    }
+    body {
+        background: #f8fafc !important;
+        color: #222 !important;
+    }
+    .center-box {
+        background: #e6e6ea !important;
+        color: #111 !important;
+        box-shadow: 0 4px 24px rgba(56, 56, 56, 0.10) !important;
+        padding: 36px 24px;
+        width: 85%;
+    }
+    .center-box .fact {
+        color: #111 !important;
+        font-size: 1rem;
+    }
+    .batchbinder-logo {
+        font-size: 2rem;
+    }
+    .continue-btn {
+        padding: 10px 30px;
+        font-size: 1rem;
+    }
+}

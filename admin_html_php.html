@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BatchBinder - Admin Panel</title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="navbar.css">
+    <style>
+        :root {
+            --primary-color: #4f46e5;
+            --secondary-color: #6b7280;
+            --text-color: #374151;
+            --border-color: #e5e7eb;
+            --card-color: #ffffff;
+            --bg-color: #f9fafb;
+            --error-color: #dc2626;
+            --success-color: #059669;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .admin-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .admin-subtitle {
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+            margin-left: 10px;
+        }
+        
+        .admin-card {
+            background: var(--card-color);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+        }
+        
+        .form-title {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-color);
+            font-weight: 500;
+        }
+        
+        .input-group input,
+        .input-group select,
+        .input-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 16px;
+            background-color: var(--card-color);
+            color: var(--text-color);
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #4338ca;
+        }
+        
+        .btn-secondary {
+            background-color: var(--border-color);
+            color: var(--text-color);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #d1d5db;
+        }
+        
+        .btn-block {
+            width: 100%;
+        }
+        
+        .message {
+            padding: 10px;
+            border-radius: 6px;
+            margin: 10px 0;
+            text-align: center;
+        }
+        
+        .error-message {
+            background-color: rgba(220, 38, 38, 0.1);
+            color: var(--error-color);
+        }
+        
+        .success-message {
+            background-color: rgba(5, 150, 105, 0.1);
+            color: var(--success-color);
+        }
+        
+        .preview-card {
+            background: var(--bg-color);
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .loading::after {
+            content: " (Loading...)";
+            color: var(--secondary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="admin-header">
+            <div>
+                <span class="admin-title">BatchBinder</span>
+                <span class="admin-subtitle">Admin Panel</span>
+            </div>
+        </div>
+
+        <!-- Login Form -->
+        <div class="admin-card" id="loginForm">
+            <h2 class="form-title">Admin Login</h2>
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" required placeholder="Enter admin email">
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" required placeholder="Enter password">
+            </div>
+            <button class="btn btn-primary btn-block" onclick="validateAdmin()">Login</button>
+            <p id="loginMessage" class="message error-message" style="display: none;"></p>
+        </div>
+
+        <!-- Operation Selection -->
+        <div class="admin-card" id="operationMenu" style="display:none;">
+            <h2 class="form-title">Select Operation</h2>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="showForm('add')">Add New Content</button>
+                <button class="btn btn-primary" onclick="showForm('edit')">Edit Existing Content</button>
+                <button class="btn btn-primary" onclick="showForm('delete')">Delete Content</button>
+            </div>
+        </div>
+
+        <!-- Upload Form -->
+        <div class="admin-card" id="uploadForm" style="display:none;">
+            <h2 class="form-title">Upload Content</h2>
+            <form id="notesUploadForm">
+                <div class="input-group">
+                    <label for="contentType">Content Type</label>
+                    <select id="contentType" required onchange="toggleExclusiveFields()">
+                        <option value="notes">Notes</option>
+                        <option value="exclusive">Exclusive!</option>
+                        <option value="assignments">Assignments</option>
+                        <option value="tests">Test Series</option>
+                    </select>
+                </div>
+                
+                <div id="exclusiveFields" style="display: none;">
+                    <div class="input-group">
+                        <label for="exclusiveTitle">Title</label>
+                        <input type="text" id="exclusiveTitle" required placeholder="Enter title">
+                    </div>
+                    <div class="input-group">
+                        <label for="exclusiveDescription">Description</label>
+                        <textarea id="exclusiveDescription" required placeholder="Enter description"></textarea>
+                    </div>
+                    <div class="input-group">
+                        <label for="exclusivePrice">Price (in ₹)</label>
+                        <input type="number" id="exclusivePrice" required placeholder="Enter price in ₹" min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="exclusiveQuote">Quote</label>
+                        <input type="text" id="exclusiveQuote" required placeholder="Enter a motivational quote">
+                    </div>
+                </div>
+                
+                <div id="generalFields">
+                    <div class="input-group">
+                        <label for="department">Department</label>
+                        <select id="department" required>
+                            <option value="csc">Computer Science and Engineering</option>
+                            <option value="it">Information Technology</option>
+                            <option value="ece">Electronics and Communication Engineering</option>
+                            <option value="eee">Electrical and Electronics Engineering</option>
+                            <option value="mech">Mechanical Engineering</option>
+                            <option value="civil">Civil Engineering</option>
+                            <option value="chem">Chemical Engineering</option>
+                            <option value="eie">Instrumentation Engineering</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="semester">Semester</label>
+                        <select id="semester" required>
+                            <option value="sem1">Semester 1</option>
+                            <option value="sem2">Semester 2</option>
+                            <option value="sem3">Semester 3</option>
+                            <option value="sem4">Semester 4</option>
+                            <option value="sem5">Semester 5</option>
+                            <option value="sem6">Semester 6</option>
+                            <option value="sem7">Semester 7</option>
+                            <option value="sem8">Semester 8</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" required placeholder="Enter subject name">
+                    </div>
+                    <div class="input-group">
+                        <label for="topic">Topic</label>
+                        <input type="text" id="topic" required placeholder="Enter topic name">
+                    </div>
+                    <div class="input-group">
+                        <label for="professor">Professor</label>
+                        <input type="text" id="professor" required placeholder="Enter professor name">
+                    </div>
+                </div>
+                
+                <div class="input-group" id="fileUploadField">
+                    <label for="contentFile">Upload File</label>
+                    <input type="file" id="contentFile" name="file">
+                </div>
+                
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-primary">Upload Content</button>
+                    <button type="button" class="btn btn-secondary" onclick="goBack()">Cancel</button>
+                </div>
+            </form>
+            <div class="preview-card" id="previewCard">
+                <h3>Preview</h3>
+                <div id="previewContent"></div>
+            </div>
+            <p id="uploadMessage" class="message success-message" style="display: none;"></p>
+        </div>
+
+        <!-- Edit Form -->
+        <div class="admin-card" id="editForm" style="display:none;">
+            <h2 class="form-title">Edit Content</h2>
+            <div class="input-group">
+                <label for="editContentType">Content Type</label>
+                <select id="editContentType" required onchange="loadNotesForEdit()">
+                    <option value="notes">Notes</option>
+                    <option value="exclusive">Exclusive!</option>
+                    <option value="assignments">Assignments</option>
+                    <option value="tests">Test Series</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="editDept">Department</label>
+                <select id="editDept" required onchange="loadNotesForEdit()">
+                    <option value="csc">Computer Science and Engineering</option>
+                    <option value="it">Information Technology</option>
+                    <option value="ece">Electronics and Communication Engineering</option>
+                    <option value="eee">Electrical and Electronics Engineering</option>
+                    <option value="mech">Mechanical Engineering</option>
+                    <option value="civil">Civil Engineering</option>
+                    <option value="chem">Chemical Engineering</option>
+                    <option value="eie">Instrumentation Engineering</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="editSem">Semester</label>
+                <select id="editSem" required onchange="loadNotesForEdit()">
+                    <option value="sem1">Semester 1</option>
+                    <option value="sem2">Semester 2</option>
+                    <option value="sem3">Semester 3</option>
+                    <option value="sem4">Semester 4</option>
+                    <option value="sem5">Semester 5</option>
+                    <option value="sem6">Semester 6</option>
+                    <option value="sem7">Semester 7</option>
+                    <option value="sem8">Semester 8</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="noteSelect">Select Content to Edit</label>
+                <select id="noteSelect" required></select>
+            </div>
+            <form id="editNotesForm">
+                <div id="editGeneralFields">
+                    <div class="input-group">
+                        <label for="editSubject">Subject</label>
+                        <input type="text" id="editSubject" required placeholder="Enter subject name">
+                    </div>
+                    <div class="input-group">
+                        <label for="editTopic">Topic</label>
+                        <input type="text" id="editTopic" required placeholder="Enter topic name">
+                    </div>
+                    <div class="input-group">
+                        <label for="editProfessor">Professor</label>
+                        <input type="text" id="editProfessor" required placeholder="Enter professor name">
+                    </div>
+                </div>
+                <div id="editExclusiveFields" style="display: none;">
+                    <div class="input-group">
+                        <label for="editExclusiveTitle">Title</label>
+                        <input type="text" id="editExclusiveTitle" required placeholder="Enter title">
+                    </div>
+                    <div class="input-group">
+                        <label for="editExclusiveDesc">Description</label>
+                        <textarea id="editExclusiveDesc" required placeholder="Enter description"></textarea>
+                    </div>
+                    <div class="input-group">
+                        <label for="editExclusivePrice">Price (in ₹)</label>
+                        <input type="number" id="editExclusivePrice" required placeholder="Enter price in ₹" min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="editExclusiveQuote">Quote</label>
+                        <input type="text" id="editExclusiveQuote" required placeholder="Enter a motivational quote">
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-primary">Update Content</button>
+                    <button type="button" class="btn btn-secondary" onclick="goBack()">Cancel</button>
+                </div>
+            </form>
+            <p id="editMessage" class="message success-message" style="display: none;"></p>
+        </div>
+
+        <!-- Delete Form -->
+        <div class="admin-card" id="deleteForm" style="display:none;">
+            <h2 class="form-title">Delete Content</h2>
+            <div class="input-group">
+                <label for="deleteContentType">Content Type</label>
+                <select id="deleteContentType" required onchange="loadNotesForDelete()">
+                    <option value="notes">Notes</option>
+                    <option value="exclusive">Exclusive!</option>
+                    <option value="assignments">Assignments</option>
+                    <option value="tests">Test Series</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="deleteDept">Department</label>
+                <select id="deleteDept" required onchange="loadNotesForDelete()">
+                    <option value="csc">Computer Science and Engineering</option>
+                    <option value="it">Information Technology</option>
+                    <option value="ece">Electronics and Communication Engineering</option>
+                    <option value="eee">Electrical and Electronics Engineering</option>
+                    <option value="mech">Mechanical Engineering</option>
+                    <option value="civil">Civil Engineering</option>
+                    <option value="chem">Chemical Engineering</option>
+                    <option value="eie">Instrumentation Engineering</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="deleteSem">Semester</label>
+                <select id="deleteSem" required onchange="loadNotesForDelete()">
+                    <option value="sem1">Semester 1</option>
+                    <option value="sem2">Semester 2</option>
+                    <option value="sem3">Semester 3</option>
+                    <option value="sem4">Semester 4</option>
+                    <option value="sem5">Semester 5</option>
+                    <option value="sem6">Semester 6</option>
+                    <option value="sem7">Semester 7</option>
+                    <option value="sem8">Semester 8</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="deleteNoteSelect">Select Content to Delete</label>
+                <select id="deleteNoteSelect" required></select>
+            </div>
+            <div class="btn-group">
+                <button onclick="confirmDelete()" class="btn btn-primary">Delete Content</button>
+                <button class="btn btn-secondary" onclick="goBack()">Cancel</button>
+            </div>
+            <p id="deleteMessage" class="message error-message" style="display: none;"></p>
+        </div>
+    </div>
+
+    <!-- Load external JavaScript file -->
+    <script src="admin.js"></script>
+</body>
+</html>

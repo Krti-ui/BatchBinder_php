@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BatchBinder - Study Resources</title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="notes.css">
+</head>
+<body>
+    <div class="main-container">
+        <!-- Desktop Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">BatchBinder</div>
+                <div class="tagline">Your Study Companion</div>
+            </div>
+
+            <div class="filter-section">
+                <div class="filter-title">Department</div>
+                <select id="deptDropdown" class="department-select">
+                    <option value="csc">Computer Science Engineering</option>
+                    <option value="it">Information Technology</option>
+                    <option value="ece">Electronics & Communication</option>
+                    <option value="eee">Electrical & Electronics</option>
+                    <option value="mech">Mechanical Engineering</option>
+                    <option value="civil">Civil Engineering</option>
+                    <option value="chem">Chemical Engineering</option>
+                    <option value="eie">Instrumentation Engineering</option>
+                </select>
+            </div>
+
+            <div class="filter-section">
+                <div class="filter-title">Semester</div>
+                <div class="semester-pills">
+                    <button class="semester-pill active" data-sem="sem1">Sem 1</button>
+                    <button class="semester-pill" data-sem="sem2">Sem 2</button>
+                    <button class="semester-pill" data-sem="sem3">Sem 3</button>
+                    <button class="semester-pill" data-sem="sem4">Sem 4</button>
+                    <button class="semester-pill" data-sem="sem5">Sem 5</button>
+                    <button class="semester-pill" data-sem="sem6">Sem 6</button>
+                    <button class="semester-pill" data-sem="sem7">Sem 7</button>
+                    <button class="semester-pill" data-sem="sem8">Sem 8</button>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <div class="filter-title">Subjects</div>
+                <div class="subjects-list">
+                    <ul id="subjectsList">
+                        <!-- Subjects will be loaded dynamically -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="content-area">
+            <!-- Top Navigation -->
+            <div class="top-nav">
+                <nav class="resource-nav">
+                    <a href="#" class="resource-link active" data-type="notes">📝 Notes</a>
+                    <a href="#" class="resource-link" data-type="assignments">📋 Assignments</a>
+                    <a href="#" class="resource-link" data-type="tests">🎯 Test Series</a>
+                    <a href="#" class="resource-link" data-type="exclusive">⭐ Exclusive!</a>
+                </nav>
+                <div class="welcome-text">
+                    Welcome to your study portal
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="main-content">
+                <div id="mainContent" class="content-grid">
+                    <div class="loading">Loading your study materials...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Content (Hidden by default) -->
+        <div class="mobile-content">
+            <div class="mobile-header">
+                <div class="mobile-filters">
+                    <select id="mobileDeptDropdown" class="department-select">
+                        <option value="csc">Computer Science Engineering</option>
+                        <option value="it">Information Technology</option>
+                        <option value="ece">Electronics & Communication</option>
+                        <option value="eee">Electrical & Electronics</option>
+                        <option value="mech">Mechanical Engineering</option>
+                        <option value="civil">Civil Engineering</option>
+                        <option value="chem">Chemical Engineering</option>
+                        <option value="eie">Instrumentation Engineering</option>
+                    </select>
+                    <div class="mobile-semester-pills">
+                        <button class="mobile-semester-pill active" data-sem="sem1">1</button>
+                        <button class="mobile-semester-pill" data-sem="sem2">2</button>
+                        <button class="mobile-semester-pill" data-sem="sem3">3</button>
+                        <button class="mobile-semester-pill" data-sem="sem4">4</button>
+                        <button class="mobile-semester-pill" data-sem="sem5">5</button>
+                        <button class="mobile-semester-pill" data-sem="sem6">6</button>
+                        <button class="mobile-semester-pill" data-sem="sem7">7</button>
+                        <button class="mobile-semester-pill" data-sem="sem8">8</button>
+                    </div>
+                </div>
+                <div class="mobile-resource-tabs">
+                    <button class="mobile-resource-tab active" data-tab="notes">Notes</button>
+                    <button class="mobile-resource-tab" data-tab="assignments">Assignments</button>
+                    <button class="mobile-resource-tab" data-tab="tests">Tests</button>
+                    <button class="mobile-resource-tab" data-tab="exclusive">Exclusive</button>
+                </div>
+            </div>
+            <div id="mobileMainContent" class="mobile-main-content">
+                <!-- Mobile content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Menu (Hidden) -->
+    <div id="mobileMenu" class="mobile-menu">
+        <div id="mobileMenuOverlay" class="mobile-menu-overlay"></div>
+        <div class="mobile-menu-content">
+            <button id="closeMobileMenuBtn" class="close-mobile-menu">×</button>
+            <!-- Mobile menu content -->
+        </div>
+    </div>
+
+    <!-- Hamburger Menu (Hidden) -->
+    <button id="hamburger" class="hamburger" style="display: none;">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <!-- Load JavaScript -->
+    <script src="updated_notes_js.js"></script>
+</body>
+</html>

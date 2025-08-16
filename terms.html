@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - BatchBinder</title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap" rel="stylesheet">
+    <link href="navbar.css" rel="stylesheet">
+    <style>
+        /* Reuse the same styles as privacy.html */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Raleway', 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            background-color: #fff;
+            color: #111;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+        
+        .terms-container {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 40px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            color: #111;
+            text-align: center;
+        }
+        
+        h2 {
+            font-size: 1.5rem;
+            margin: 30px 0 15px;
+            color: #111;
+        }
+        
+        p, li {
+            color: #555;
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+        
+        ul {
+            padding-left: 20px;
+        }
+        
+        .last-updated {
+            text-align: right;
+            font-style: italic;
+            color: #777;
+            margin-top: 40px;
+        }
+        
+        .disclaimer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+            border-left: 4px solid #38bdf8;
+        }
+        
+        .disclaimer strong {
+            color: #111;
+        }
+         .footer {
+            width: 100%;
+            padding: 40px 0 30px;
+            background: #fff;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-link {
+            color: #38bdf8;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        
+        .footer-link:hover {
+            color: #0ea5e9;
+            text-decoration: underline;
+        }
+        
+        .copyright {
+            font-size: 0.85rem;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index2.html" class="navbar-logo">BatchBinder</a>
+        <div class="navbar-links">
+            <a href="index2.html">Home</a>
+            <a href="notes.html">Notes</a>
+            <a href="#" onclick="showComingSoonMessage('Bookshelf'); return false;">Bookshelf</a>
+            <a href="#" onclick="showComingSoonMessage('Collaborative Community'); return false;">Community</a>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <div class="container">
+        <div class="terms-container">
+            <h1>Terms of Service</h1>
+            
+            <div class="disclaimer">
+                <strong>Content Disclaimer:</strong> BatchBinder is a platform for educational content sharing. 
+                We do not verify the accuracy, completeness, or legality of user-uploaded materials. 
+                Users are solely responsible for the content they upload and share.
+            </div>
+            
+            <p>Last Updated: June 15, 2025</p>
+            
+            <h2>1. Acceptance of Terms</h2>
+            <p>By accessing or using the BatchBinder website, you agree to be bound by these Terms of Service.</p>
+            
+            <h2>2. User Responsibilities</h2>
+            <p>As a user of BatchBinder, you agree to:</p>
+            <ul>
+                <li>Only upload content that you have the right to share</li>
+                <li>Not upload copyrighted material without permission</li>
+                <li>Not upload harmful or inappropriate content</li>
+                <li>Use the platform for lawful purposes only</li>
+            </ul>
+            
+            <h2>3. Content Policy</h2>
+            <p>BatchBinder allows users to upload and share educational materials. However:</p>
+            <ul>
+                <li>We do not review all content before it's posted</li>
+                <li>We reserve the right to remove any content that violates our policies</li>
+                <li>We are not responsible for the accuracy or quality of user-uploaded content</li>
+            </ul>
+            
+            <h2>4. Intellectual Property</h2>
+            <p>Users retain ownership of the content they upload. By uploading content, you grant BatchBinder a license to display and distribute that content.</p>
+            
+            <h2>5. Limitation of Liability</h2>
+            <p>BatchBinder shall not be liable for any indirect, incidental, special, consequential or punitive damages resulting from your use of the service.</p>
+            
+            <div class="last-updated">
+                <p>This document was last updated on June 15, 2025.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="terms.html" class="footer-link">Terms of Service</a>
+                    <a href="privacy.html" class="footer-link">Privacy Policy</a>
+                    <a href="contact.html" class="footer-link">Contact Us</a>
+                </div>
+                <div class="copyright">
+                    &copy; 2025 BatchBinder. All rights reserved.<br>
+                    <small>Disclaimer: BatchBinder does not claim ownership of user-uploaded content. All materials are provided for educational purposes only.</small>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="index2.js"></script>
+</body>
+</html>

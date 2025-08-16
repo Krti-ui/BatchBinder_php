@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BatchBinder-Your Everyday Backpack!</title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap" rel="stylesheet">
+    <link href="navbar.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Raleway', 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background-color: #fff;
+            color: #111;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+        
+        /* Mobile Header */
+        .mobile-header {
+            position: relative;
+            height: 60vh;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), 
+                        url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .mobile-header-content h1 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #111;
+        }
+        
+        .mobile-header-content p {
+            font-size: 1.2rem;
+            color: #333;
+        }
+        
+        /* Desktop Header */
+        .desktop-header {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            display: none;
+        }
+        
+        .header-slideshow {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            z-index: 1;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            background-size: cover;
+            background-position: center;
+            animation: slideshow 20s linear infinite;
+            border-radius: 20px;
+        }
+        
+        @keyframes slideshow {
+            0%, 20% { opacity: 1; }
+            25%, 95% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        
+        .slide:nth-child(1) {
+            background-image: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3');
+            animation-delay: 0s;
+        }
+        
+        .slide:nth-child(2) {
+            background-image: url('https://images.unsplash.com/photo-1513258496099-48168024aec0?ixlib=rb-4.0.3');
+            animation-delay: 5s;
+        }
+        
+        .slide:nth-child(3) {
+            background-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3');
+            animation-delay: 10s;
+        }
+        
+        .slide:nth-child(4) {
+            background-image: url('https://images.unsplash.com/photo-1501504905252-473c47e087f8?ixlib=rb-4.0.3');
+            animation-delay: 15s;
+        }
+        
+        .desktop-header-content {
+            position: absolute;
+            right: 40px;
+            bottom: 40px;
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            max-width: 500px;
+            text-align: right;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .desktop-header-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #111;
+        }
+        
+        .desktop-header-content p {
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 25px;
+        }
+        
+        /* Mobile Features */
+        .mobile-features {
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .mobile-features h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #111;
+        }
+        
+        .mobile-features-content {
+            padding: 0 15px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .mobile-features-content p {
+            margin-bottom: 20px;
+            line-height: 1.7;
+            color: #333;
+            font-size: 1.1rem;
+        }
+        
+        /* Desktop Features */
+        .desktop-features {
+            padding: 80px 0;
+            text-align: center;
+            display: none;
+        }
+        
+        .desktop-features h2 {
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            color: #111;
+        }
+        
+        .desktop-features > p {
+            max-width: 700px;
+            margin: 0 auto 60px;
+            font-size: 1.1rem;
+            color: #555;
+        }
+        
+        .features-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .feature {
+            width: 320px;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            text-align: left;
+            border: 1px solid #eee;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .feature:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+        }
+        
+        .feature h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: #111;
+        }
+        
+        .feature p {
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+        
+        .coming-soon-badge {
+            display: inline-block;
+            background: #f8e9b0;
+            color: #8a6d3b;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+        /* Footer */
+        .footer {
+            width: 100%;
+            padding: 40px 0 30px;
+            background: #fff;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-link {
+            color: #38bdf8;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        
+        .footer-link:hover {
+            color: #0ea5e9;
+            text-decoration: underline;
+        }
+        
+        .copyright {
+            font-size: 0.85rem;
+            color: #777;
+        }
+    
+        
+        /* Responsive Breakpoints */
+        @media (max-width: 991px) {
+            .mobile-header {
+                display: flex;
+            }
+            .mobile-features {
+                display: block;
+            }
+            .mobile-cta {
+                display: block;
+            }
+            .desktop-header,
+            .desktop-features{
+                display: none;
+            }
+            
+            .login-btn {
+                display: none;
+            }
+            
+            .navbar-links a.login-btn {
+                display: block;
+                text-align: center;
+                margin-top: 15px;
+                width: 100%;
+            }
+        }
+        
+        @media (min-width: 992px) {
+            .mobile-header,
+            .mobile-features,
+            .mobile-cta {
+                display: none;
+            }
+            .desktop-header,
+            .desktop-features{
+                display: block;
+            }
+            
+            .login-btn {
+                display: inline-block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index2.html" class="navbar-logo">BatchBinder</a>
+        <div class="navbar-links">
+            <a href="#">Home</a>
+            <a href="notes.html">Notes</a>
+            <a href="#" onclick="showComingSoonMessage('Bookshelf'); return false;">Bookshelf</a>
+            <a href="#" onclick="showComingSoonMessage('Collaborative Community'); return false;">Community</a>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <!-- Mobile Header -->
+    <header class="mobile-header">
+        <div class="mobile-header-content">
+            <h1>Your Academic Success</h1>
+            <p>Starts Here</p>
+        </div>
+    </header>
+
+    <!-- Desktop Header -->
+    <header class="desktop-header">
+        <div class="header-slideshow">
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+        </div>
+        <div class="desktop-header-content">
+            <h1>Your Academic Success</h1>
+            <p>Starts Here</p>
+        </div>
+    </header>
+
+    <!-- Mobile Features -->
+    <section class="mobile-features">
+        <div class="container">
+            <h2>Why Choose BatchBinder?</h2>
+            <div class="mobile-features-content">
+                <p>Our platform is designed to support your academic journey with comprehensive resources.</p>
+                <p>Access a wide range of student-centric learning materials.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Desktop Features -->
+    <section class="desktop-features">
+        <div class="container">
+            <h2>Why Choose BatchBinder?</h2>
+            <p>Our platform is designed to support your academic journey with comprehensive resources and a collaborative community.</p>
+            <div class="features-container">
+                <div class="feature">
+                    <h3>Extensive Notes Collection</h3>
+                    <p>Access a wide range of student-centric learning materials.</p>
+                </div>
+                <div class="feature" onclick="showComingSoonMessage('Collaborative Community')" style="cursor: pointer;">
+                    <span class="coming-soon-badge">Coming Soon</span>
+                    <h3>Collaborative Community</h3>
+                    <p>Connect with others, share insights, and collaborate on study materials.</p>
+                </div>
+                <div class="feature" onclick="showComingSoonMessage('Expert Resources')" style="cursor: pointer;">
+                    <span class="coming-soon-badge">Coming Soon</span>
+                    <h3>Expert Resources</h3>
+                    <p>Benefit from professional resources, study grades, and academic records.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="terms.html" class="footer-link">Terms of Service</a>
+                <a href="privacy.html" class="footer-link">Privacy Policy</a>
+                <a href="contact.html" class="footer-link">Contact Us</a>
+            </div>
+            <div class="copyright">
+                &copy; 2025 BatchBinder. All rights reserved.<br>
+                <small>Disclaimer: BatchBinder does not claim ownership of user-uploaded content. All materials are provided for educational purposes only.</small>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script src="index2.js"></script>
+</body>
+</html>
